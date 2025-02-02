@@ -1,11 +1,13 @@
 <?php
+// config/database.php
 class Database {
     private $host = "localhost";
-    private $dbname = "biblioteca_digital";
-    private $username = "root";
-    private $password = "";
+    private $dbname = "biblioteca_digital";  // Nombre de la base de datos
+    private $username = "root";  // Usuario de la base de datos
+    private $password = "";      // Contraseña del usuario
     public $conn;
 
+    // Método para establecer la conexión a la BD
     public function connect() {
         $this->conn = null;
         try {
@@ -18,3 +20,4 @@ class Database {
     }
 }
 ?>
+
