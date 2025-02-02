@@ -2,19 +2,27 @@
 // config/database.php
 class Database {
     private $host = "localhost";
-    private $dbname = "biblioteca_digital";  // Nombre de la base de datos
-    private $username = "root";  // Usuario de la base de datos
-    private $password = "";      // Contraseña del usuario
+    private $dbname = "biblioteca_digital";
+    private $username = "root";
+    private $password = "";
     public $conn;
 
-    // Método para establecer la conexión a la BD
     public function connect() {
         $this->conn = null;
         try {
-            $this->conn = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->dbname, $this->username, $this->password);
+            // Conexión usando PDO
+            $this->conn = new PDO(
+                "mysql:host=" . $this->host . ";dbname=" . $this->dbname, 
+                $this->username, 
+                $this->password
+            );
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch(PDOException $e) {
-            echo "Error de conexión: " . $e->getMessage();
+            // Muestra una pantalla de error genérica manteniendo el menú
+            include_once "app/views/header.php";
+            echo "<h2>Ocurrió un error al acceder a la base de datos.</h2>";
+            include_once "app/views/footer.php";
+            exit;
         }
         return $this->conn;
     }

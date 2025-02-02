@@ -1,0 +1,37 @@
+/* public/css/estilos.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header, footer {
+    background: #333;
+    color: #fff;
+    padding: 10px;
+}
+
+header h1, footer p {
+    margin: 0;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+main {
+    padding: 20px;
+}
+
+.libro {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}
