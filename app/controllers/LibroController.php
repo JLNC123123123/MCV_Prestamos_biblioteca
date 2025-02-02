@@ -28,7 +28,10 @@ class LibroController {
     
     // Administración de libros (solo admin)
     public function adminLibros() {
-        session_start();
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        
         if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['rol'] != 'admin') {
             header("Location: index.php?page=home");
             exit;
@@ -39,7 +42,10 @@ class LibroController {
     
     // Método para insertar un libro (desde un formulario de admin)
     public function insertar() {
-        session_start();
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        
         if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['rol'] != 'admin') {
             header("Location: index.php?page=home");
             exit;

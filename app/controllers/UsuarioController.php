@@ -42,7 +42,10 @@ class UsuarioController {
             $password = $_POST['password'];
             $usuario = $this->usuarioModel->login($email, $password);
             if ($usuario) {
-                session_start();
+                if (session_status() == PHP_SESSION_NONE) {
+                    session_start();
+                }
+                
                 $_SESSION['usuario'] = $usuario;
                 // Guardar cookie (opcional) para recordar al usuario
                 setcookie("user", $usuario['email'], time() + (86400 * 30), "/");
@@ -58,14 +61,19 @@ class UsuarioController {
     
     // Cerrar sesión
     public function logout() {
-        session_start();
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }        
         session_destroy();
         header("Location: index.php?page=home");
     }
     
     // Mostrar perfil
     public function profile() {
-        session_start();
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        
         if (!isset($_SESSION['usuario'])) {
             header("Location: index.php?page=login");
             exit;
@@ -76,7 +84,10 @@ class UsuarioController {
     
     // Administración de usuarios (solo admin)
     public function adminUsuarios() {
-        session_start();
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        
         if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['rol'] != 'admin') {
             header("Location: index.php?page=home");
             exit;

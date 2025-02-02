@@ -1,6 +1,8 @@
 <?php
-// app/views/header.php
-session_start();
+// app/views/header.phpIniciar la sesión solo si no está activa
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">

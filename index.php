@@ -8,6 +8,15 @@ if (session_status() == PHP_SESSION_NONE) {
 // Función simple para limpiar la variable GET
 $page = isset($_GET['page']) ? $_GET['page'] : 'home';
 
+// Contador de visitas usando cookies
+$cookie_name = "contador_visitas";
+$contador = isset($_COOKIE[$cookie_name]) ? (int) $_COOKIE[$cookie_name] : 0;
+$contador++; // Aumentar el contador
+
+// Guardar la cookie con una duración de 30 días
+setcookie($cookie_name, $contador, time() + (30 * 24 * 60 * 60), "/");
+
+
 // Rutas y llamadas a controladores
 switch($page) {
     case 'home':
